@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megzit - Electric Fencing Systems</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #dc3545;
+            --secondary: #6c757d;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --tech-red: #e63946;
+            --tech-orange: #fca311;
+            --tech-gradient: linear-gradient(135deg, var(--tech-red), var(--tech-orange));
+            --tech-dark: #16213e;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .back-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--tech-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid white;
+            z-index: 1100;
+        }
+        
+        .back-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-section {
+            background: var(--tech-dark);
+            color: white;
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyMzAsNTcsNzEsMC4xKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .hero-badge {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            color: var(--tech-dark);
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--tech-gradient);
+            border-radius: 2px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--tech-red);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--tech-gradient);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--tech-red);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .system-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .system-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .system-header {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .system-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+        }
+        
+        .system-body {
+            padding: 30px;
+        }
+        
+        .system-feature {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .system-feature:hover {
+            background: rgba(230, 57, 70, 0.05);
+        }
+        
+        .system-feature i {
+            color: var(--tech-red);
+            margin-right: 12px;
+            margin-top: 3px;
+            font-size: 1.2rem;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .application-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--tech-orange);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .application-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--tech-gradient);
+        }
+        
+        .application-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .application-icon {
+            font-size: 2.5rem;
+            color: var(--tech-orange);
+            margin-bottom: 15px;
+        }
+        
+        .specs-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+        
+        .specs-table th {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .specs-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .cta-section {
+            background: var(--tech-dark);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyMzAsNTcsNzEsMC4wNSkiIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .btn-tech {
+            background: var(--tech-gradient);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-tech::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-tech:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .btn-tech:hover::before {
+            left: 100%;
+        }
+        
+        footer {
+            background: var(--tech-dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 3px solid var(--tech-red);
+        }
+        
+        .phone-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tech-orange);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .back-icon {
+                width: 45px;
+                height: 45px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .hero-section {
+                padding: 120px 0 60px;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+                padding: 80px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Icon -->
+    <div class="back-icon" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <span class="hero-badge">HOME - ELECTRIC FENCING</span>
+                    <h1 class="display-4 fw-bold mb-4">Electric Fencing Systems</h1>
+                    <h2 class="mb-4">Maximum Security Perimeter Protection</h2>
+                    <p class="lead mb-4">Secure your property with Megzit's advanced electric fencing solutions. Our high-voltage perimeter security systems provide powerful deterrence against intruders while ensuring safety for authorized personnel.</p>
+                    <a href="#contact" class="btn btn-tech btn-lg pulse">Get Free Security Assessment</a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://www.techyshop.co.ke/wp-content/uploads/2020/10/Benefits-of-Electric-Fence-for-Home-of-Office.jpg" alt="Electric Fencing System" class="img-fluid rounded shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Electric Fencing Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Why Choose Electric Fencing?</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>High Deterrence</h4>
+                        <p>Powerful psychological and physical barrier that discourages intrusion attempts effectively.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h4>Instant Alert System</h4>
+                        <p>Immediate notification when the fence is tampered with, allowing for quick response.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h4>Customizable Perimeter</h4>
+                        <p>Adaptable to any property size and shape with flexible installation options.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Weather Resistant</h4>
+                        <p>Designed to withstand harsh weather conditions while maintaining optimal performance.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h4>Cost-Effective</h4>
+                        <p>Lower long-term costs compared to physical guards with 24/7 protection.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h4>Energy Efficient</h4>
+                        <p>Modern systems consume minimal electricity while delivering maximum security.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Systems Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Our Electric Fencing Solutions</h2>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="system-card">
+                        <div class="system-header">
+                            <h3><i class="fas fa-bolt me-2"></i>Standard Perimeter Systems</h3>
+                        </div>
+                        <div class="system-body">
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>5-7 Wire Configuration</strong> – Optimal balance of security and visibility</div>
+                            </div>
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Energizers: 0.5-1.0 Joule</strong> – Suitable for residential and commercial properties</div>
+                            </div>
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Polywire & Steel Wire Options</strong> – Durable materials for long-lasting performance</div>
+                            </div>
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Basic Alarm Integration</strong> – Connects to existing security systems</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="system-card">
+                        <div class="system-header">
+                            <h3><i class="fas fa-shield-alt me-2"></i>Advanced Security Systems</h3>
+                        </div>
+                        <div class="system-body">
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>8-12 Wire Configuration</strong> – Maximum security for high-risk areas</div>
+                            </div>
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Energizers: 1.5-5.0 Joule</strong> – Powerful deterrence for industrial applications</div>
+                            </div>
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Stainless Steel Wires</strong> – Enhanced durability and conductivity</div>
+                            </div>
+                            <div class="system-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Smart Monitoring</strong> – Zone detection and remote system control</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Specifications Table -->
+            <div class="specs-table">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th colspan="3">System Specifications</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Voltage Output</strong></td>
+                            <td>Standard: 5,000-7,000V</td>
+                            <td>Advanced: 7,000-10,000V</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pulse Interval</strong></td>
+                            <td>1.0-1.5 seconds</td>
+                            <td>0.7-1.0 seconds</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Power Source</strong></td>
+                            <td colspan="2">Mains power with battery backup (24-48 hours)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monitoring</strong></td>
+                            <td>Basic alarm triggers</td>
+                            <td>Zone detection & smartphone alerts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Warranty</strong></td>
+                            <td>2 years on equipment</td>
+                            <td>3 years on equipment + 1 year maintenance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Ideal Applications</h2>
+            <p class="text-center mb-5">Our electric fencing solutions are perfect for:</p>
+            
+            <div class="applications-grid">
+                <div class="application-item">
+                    <div class="application-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h5>Residential Properties</h5>
+                    <p>Secure your home and family with discreet yet powerful perimeter protection.</p>
+                </div>
+                <div class="application-item">
+                    <div class="application-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h5>Industrial Facilities</h5>
+                    <p>Protect valuable assets, equipment, and restricted areas in manufacturing plants.</p>
+                </div>
+                <div class="application-item">
+                    <div class="application-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h5>Warehouses & Storage</h5>
+                    <p>Deter theft and unauthorized access to storage facilities and logistics centers.</p>
+                </div>
+                <div class="application-item">
+                    <div class="application-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h5>Educational Institutions</h5>
+                    <p>Enhance campus security while maintaining an open environment during operational hours.</p>
+                </div>
+                <div class="application-item">
+                    <div class="application-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <h5>Agricultural Properties</h5>
+                    <p>Protect livestock, crops, and equipment across large rural properties.</p>
+                </div>
+                <div class="application-item">
+                    <div class="application-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h5>Commercial Complexes</h5>
+                    <p>Secure office parks, shopping centers, and business districts after hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Secure Your Perimeter Today!</h2>
+            <p class="lead mb-4">Don't compromise on security. Our electric fencing systems provide the ultimate deterrent against intruders while offering peace of mind 24/7. Contact us for a free site assessment and customized solution.</p>
+            <div class="phone-number mb-4">
+                <i class="fas fa-phone me-2"></i>Call 0111412407 for a FREE consultation!
+            </div>
+            <a href="tel:0111412407" class="btn btn-tech btn-lg">Call Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Megzit Security. All rights reserved.</p>
+            <p>Electric Fencing Systems - Maximum Security Perimeter Protection</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megzit - Surveillance Systems</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --tech-green: #00c853;
+            --tech-blue: #2962ff;
+            --tech-gradient: linear-gradient(135deg, var(--tech-green), var(--tech-blue));
+            --tech-dark: #0a1929;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        
+        
+        .back-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--tech-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+        
+        .back-icon:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-section {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            color: var(--tech-dark);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--tech-gradient);
+            border-radius: 2px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--tech-green);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--tech-gradient);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-icon {
+            font-size: 2.8rem;
+            color: var(--tech-green);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .solution-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .solution-header {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .solution-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+        }
+        
+        .solution-body {
+            padding: 30px;
+        }
+        
+        .solution-feature {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .solution-feature:hover {
+            background: rgba(41, 98, 255, 0.05);
+        }
+        
+        .solution-feature i {
+            color: var(--tech-green);
+            margin-right: 12px;
+            margin-top: 3px;
+            font-size: 1.2rem;
+        }
+        
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .industry-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--tech-blue);
+        }
+        
+        .industry-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .industry-icon {
+            font-size: 2.5rem;
+            color: var(--tech-blue);
+            margin-bottom: 15px;
+        }
+        
+        .cta-section {
+            background: var(--tech-dark);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .btn-tech {
+            background: var(--tech-gradient);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-tech::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-tech:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .btn-tech:hover::before {
+            left: 100%;
+        }
+        
+        footer {
+            background: var(--tech-dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .phone-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--tech-green);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+        
+        .badge-resolution {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            display: inline-block;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .back-icon {
+                width: 45px;
+                height: 45px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .hero-section {
+                padding: 100px 0 60px;
+                clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .industries-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+                padding: 80px 0;
+            }
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Icon -->
+    <div class="back-icon" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Surveillance Systems</h1>
+                    <h2 class="mb-4">Protect What Matters Most with Megzit</h2>
+                    <p class="lead mb-4">Security is not a luxury—It's a necessity. At Megzit, we provide high-quality, reliable surveillance solutions tailored to meet the security needs of homes, businesses, and institutions. Whether you need to monitor your premises 24/7, prevent unauthorized access, or simply have peace of mind knowing your property is secure, we've got you covered.</p>
+                    <a href="#contact" class="btn btn-light btn-lg">Get Free Consultation</a>
+                </div>
+                <div class="col-lg-6 text-center floating">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Surveillance System" class="img-fluid rounded shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Invest Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Why Invest in a Surveillance System?</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Deter Crime</h4>
+                        <p>Visible cameras discourage theft, vandalism, and trespassing, making your property less attractive to criminals.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>24/7 Monitoring</h4>
+                        <p>Keep an eye on your property anytime, from anywhere with remote access to live and recorded footage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Solutions Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Our Surveillance Solutions</h2>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-camera me-2"></i>High-Quality CCTV Cameras</h3>
+                        </div>
+                        <div class="solution-body">
+                            <p>We offer a variety of cameras to suit different security needs:</p>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Bullet Cameras</strong> – Ideal for outdoor security, offering long-range vision and weather resistance.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Dome Cameras</strong> – Perfect for indoor use, providing wide-angle coverage with a discreet design.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Resolutions Available</strong> – 
+                                    <span class="badge-resolution">2MP</span>
+                                    <span class="badge-resolution">4MP</span>
+                                    <span class="badge-resolution">8MP</span>
+                                    for clear, detailed footage.
+                                </div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Night Vision & Motion Detection</strong> – Monitor your property even in total darkness with infrared technology.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-hdd me-2"></i>Network Video Recorders (NVRs)</h3>
+                        </div>
+                        <div class="solution-body">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>4, 8, and 16 Channel NVRs</strong> – Connect multiple cameras for complete property coverage.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>High Storage Capacity</strong> – Store and review footage with expandable hard drive options.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>AI-Powered Features</strong> – Smart motion alerts, facial recognition, and automatic notifications.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Remote Monitoring</strong> – Access live feeds and past recordings from your smartphone or PC.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-tools me-2"></i>Professional Installation & Support</h3>
+                        </div>
+                        <div class="solution-body">
+                            <p>At Megzit, we don't just sell surveillance systems—we provide end-to-end solutions including:</p>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Expert Consultation</strong> – We assess your security needs and recommend the best setup.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Professional Installation</strong> – Our skilled technicians install and configure your system for optimal performance.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>Training & Support</strong> – Learn how to use your system effectively with our guidance.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div><strong>24/7 Customer Service</strong> – Assistance whenever you need it.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries We Serve -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Industries We Serve</h2>
+            <p class="text-center mb-5">Our surveillance solutions are ideal for:</p>
+            
+            <div class="industries-grid">
+                <div class="industry-item">
+                    <div class="industry-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h5>Homes</h5>
+                    <p>Protect your family and property from intruders.</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h5>Businesses</h5>
+                    <p>Monitor employees, prevent theft, and secure assets.</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h5>Schools & Institutions</h5>
+                    <p>Enhance student and staff safety.</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h5>Hotels & Restaurants</h5>
+                    <p>Ensure smooth operations and guest security.</p>
+                </div>
+                <div class="industry-item">
+                    <div class="industry-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h5>Warehouses & Factories</h5>
+                    <p>Prevent loss and enhance productivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Get Secured Today!</h2>
+            <p class="lead mb-4">Don't wait until it's too late. Upgrade your security with Megzit's advanced surveillance solutions! Whether you need a single camera setup or a full-scale security system, we have the right solution for you.</p>
+            <div class="phone-number mb-4">
+                <i class="fas fa-phone me-2"></i>Call 0111412407 today for a FREE consultation!
+            </div>
+            <a href="tel:0111412407" class="btn btn-tech btn-lg">Call Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Megzit Security. All rights reserved.</p>
+            <p>Surveillance Systems - Protect What Matters Most</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

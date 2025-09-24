@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megzit - Web Development Services</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6f42c1;
+            --secondary: #0dcaf0;
+            --dark: #1a1e24;
+            --light: #f8f9fa;
+            --code-blue: #2965f1;
+            --code-purple: #6f42c1;
+            --code-green: #2ecc71;
+            --code-yellow: #f1c40f;
+            --code-gradient: linear-gradient(135deg, var(--code-blue), var(--code-purple));
+            --terminal-dark: #0d1117;
+        }
+        
+        body {
+            font-family: 'Source Code Pro', monospace;
+            background-color: var(--terminal-dark);
+            color: #e6edf3;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .back-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--code-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid var(--code-green);
+            z-index: 1100;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .back-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+            background: var(--code-green);
+            color: var(--terminal-dark);
+        }
+        
+        .hero-section {
+            background: var(--terminal-dark);
+            color: #e6edf3;
+            padding: 140px 0 80px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(41, 101, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(111, 66, 193, 0.1) 0%, transparent 50%);
+        }
+        
+        .code-badge {
+            background: rgba(46, 204, 113, 0.1);
+            color: var(--code-green);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            font-weight: 600;
+            color: #e6edf3;
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--code-gradient);
+            border-radius: 2px;
+        }
+        
+        .service-card {
+            background: rgba(13, 17, 23, 0.7);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-left: 4px solid var(--code-blue);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid #30363d;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(41, 101, 241, 0.05) 0%, transparent 50%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--code-green);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--code-blue);
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-card:hover .service-icon {
+            color: var(--code-green);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-badge {
+            background: rgba(41, 101, 241, 0.2);
+            color: var(--code-blue);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(41, 101, 241, 0.3);
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .process-card {
+            background: rgba(13, 17, 23, 0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            height: 100%;
+            border: 1px solid #30363d;
+            backdrop-filter: blur(10px);
+        }
+        
+        .process-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .process-header {
+            background: var(--code-gradient);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .process-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+        }
+        
+        .process-body {
+            padding: 25px;
+        }
+        
+        .process-step {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+            counter-increment: step-counter;
+            position: relative;
+        }
+        
+        .process-step::before {
+            content: counter(step-counter);
+            background: var(--code-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .process-step:hover {
+            background: rgba(41, 101, 241, 0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            background: rgba(13, 17, 23, 0.7);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #30363d;
+            backdrop-filter: blur(10px);
+            border-top: 4px solid var(--code-purple);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid var(--code-green);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--code-purple);
+            margin-bottom: 15px;
+        }
+        
+        .feature-item:hover .feature-icon {
+            color: var(--code-green);
+        }
+        
+        .code-snippet {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #30363d;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .code-keyword {
+            color: var(--code-blue);
+        }
+        
+        .code-function {
+            color: var(--code-green);
+        }
+        
+        .code-string {
+            color: var(--code-yellow);
+        }
+        
+        .code-comment {
+            color: #8b949e;
+        }
+        
+        .cta-section {
+            background: var(--terminal-dark);
+            color: #e6edf3;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid #30363d;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 70% 20%, rgba(111, 66, 193, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 30% 80%, rgba(41, 101, 241, 0.1) 0%, transparent 50%);
+        }
+        
+        .btn-dev {
+            background: var(--code-gradient);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-dev::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-dev:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            color: white;
+            background: var(--code-green);
+        }
+        
+        .btn-dev:hover::before {
+            left: 100%;
+        }
+        
+        footer {
+            background: var(--terminal-dark);
+            color: #8b949e;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #30363d;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .phone-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--code-green);
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--code-green);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--code-green) }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .back-icon {
+                width: 45px;
+                height: 45px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .hero-section {
+                padding: 120px 0 60px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 80px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Icon -->
+    <div class="back-icon" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <span class="code-badge">HOME - WEB DEVELOPMENT</span>
+                    <h1 class="display-4 fw-bold mb-4 typewriter">Web development Services</h1>
+                    <h2 class="mb-4">Crafting Digital Experiences That Convert</h2>
+                    <p class="lead mb-4">At Megzit, we transform ideas into powerful web solutions. From responsive websites to complex web applications, we code with precision and design with purpose.</p>
+                    <a href="#contact" class="btn btn-dev btn-lg">Start Your Project</a>
+                </div>
+                <div class="col-lg-6 text-center floating">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=400&q=80" alt="Web Development" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Services Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Our Web Development Services</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4>Custom Website Development</h4>
+                        <p>Tailored websites built from scratch to meet your specific business requirements and brand identity.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">HTML5</span>
+                            <span class="tech-badge">CSS3</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">React</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h4>E-Commerce Solutions</h4>
+                        <p>Full-featured online stores with payment integration, inventory management, and customer portals.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">WooCommerce</span>
+                            <span class="tech-badge">Shopify</span>
+                            <span class="tech-badge">Magento</span>
+                            <span class="tech-badge">Payment APIs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Responsive Web Design</h4>
+                        <p>Websites that look and function perfectly on all devices - desktops, tablets, and smartphones.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Bootstrap</span>
+                            <span class="tech-badge">Flexbox</span>
+                            <span class="tech-badge">Grid</span>
+                            <span class="tech-badge">Media Queries</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>Web Application Development</h4>
+                        <p>Dynamic, interactive web applications with complex functionality and database integration.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Website Maintenance</h4>
+                        <p>Ongoing support, updates, and optimization to keep your website secure and performing optimally.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Security</span>
+                            <span class="tech-badge">Performance</span>
+                            <span class="tech-badge">Backups</span>
+                            <span class="tech-badge">Updates</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>SEO Optimization</h4>
+                        <p>Improve your website's visibility on search engines with our comprehensive SEO strategies.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Google Analytics</span>
+                            <span class="tech-badge">Keyword Research</span>
+                            <span class="tech-badge">On-Page SEO</span>
+                            <span class="tech-badge">Technical SEO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Snippet Section -->
+    <section class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="section-title">Our Development Approach</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="code-snippet">
+                        <span class="code-keyword">function</span> <span class="code-function">developWebsite</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> <span class="code-variable">planning</span> = <span class="code-string">"Requirements analysis"</span>;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> <span class="code-variable">design</span> = <span class="code-string">"UI/UX prototyping"</span>;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> <span class="code-variable">development</span> = <span class="code-string">"Clean, efficient coding"</span>;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> <span class="code-variable">testing</span> = <span class="code-string">"Quality assurance"</span>;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> <span class="code-variable">deployment</span> = <span class="code-string">"Go live with support"</span>;<br>
+                        &nbsp;&nbsp;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">success</span>;<br>
+                        }<br>
+                        <br>
+                        <span class="code-comment">// We follow agile methodologies</span><br>
+                        <span class="code-comment">// to deliver exceptional results</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="process-card">
+                        <div class="process-header">
+                            <h3><i class="fas fa-code-branch me-2"></i>Our Development Process</h3>
+                        </div>
+                        <div class="process-body">
+                            <div class="process-step">
+                                <div>Discovery & Planning - We analyze your requirements and create a detailed project roadmap.</div>
+                            </div>
+                            <div class="process-step">
+                                <div>Design & Prototyping - Our designers create wireframes and mockups for your approval.</div>
+                            </div>
+                            <div class="process-step">
+                                <div>Development & Coding - We build your website using the latest technologies and best practices.</div>
+                            </div>
+                            <div class="process-step">
+                                <div>Testing & Quality Assurance - Rigorous testing across devices and browsers ensures flawless performance.</div>
+                            </div>
+                            <div class="process-step">
+                                <div>Deployment & Launch - We deploy your website and provide training for content management.</div>
+                            </div>
+                            <div class="process-step">
+                                <div>Support & Maintenance - Ongoing support to keep your website secure and up-to-date.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Web Development Services?</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h5>Fast Loading Times</h5>
+                    <p>Optimized code and assets for lightning-fast website performance.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h5>Secure & Protected</h5>
+                    <p>Implementation of security best practices to protect your website and data.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h5>SEO-Friendly</h5>
+                    <p>Websites built with search engine optimization principles from the ground up.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile"></i>
+                    </div>
+                    <h5>Mobile-First Design</h5>
+                    <p>Responsive designs that prioritize mobile users without compromising desktop experience.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h5>Scalable Solutions</h5>
+                    <p>Websites and applications built to grow with your business needs.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h5>Ongoing Support</h5>
+                    <p>Continuous maintenance and support to keep your website running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Ready to Build Your Digital Presence?</h2>
+            <p class="lead mb-4">Let's code your success story together. Contact us for a free consultation and project estimate.</p>
+            <div class="phone-number mb-4">
+                <i class="fas fa-phone me-2"></i>Call 0111412407 to discuss your project!
+            </div>
+            <a href="tel:0111412407" class="btn btn-dev btn-lg">Start Coding Your Future</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Megzit Web Development. All rights reserved.</p>
+            <p>Web Development Services - Crafting Digital Experiences That Convert</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

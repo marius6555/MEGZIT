@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Megzit - Access Control Systems</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0d6efd;
+            --secondary: #6c757d;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --tech-blue: #1a73e8;
+            --tech-purple: #6f42c1;
+            --tech-gradient: linear-gradient(135deg, var(--tech-blue), var(--tech-purple));
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .back-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--tech-gradient);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .back-icon:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-section {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--tech-gradient);
+            border-radius: 2px;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-left: 4px solid var(--tech-blue);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--tech-blue);
+            margin-bottom: 15px;
+        }
+        
+        .solution-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .solution-header {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .solution-body {
+            padding: 25px;
+        }
+        
+        .solution-feature {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .solution-feature i {
+            color: var(--tech-blue);
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .why-choose-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .why-choose-icon {
+            font-size: 2.5rem;
+            color: var(--tech-blue);
+            margin-bottom: 15px;
+        }
+        
+        .cta-section {
+            background: var(--tech-gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .btn-tech {
+            background: var(--tech-gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-tech:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .phone-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--tech-blue);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .back-icon {
+                width: 40px;
+                height: 40px;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .hero-section {
+                padding: 80px 0;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Icon -->
+    <div class="back-icon" onclick="window.history.back()">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+   
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Access Control Systems</h1>
+                    <h2 class="mb-4">Secure & Smart Entry Solutions by Megzit</h2>
+                    <p class="lead mb-4">Take control of who enters your home, office, or business with Megzit's advanced Access Control Systems. Whether you need keyless entry, biometric authentication, or RFID card access, we provide secure, efficient, and customizable solutions to protect your property.</p>
+                    <a href="#contact" class="btn btn-light btn-lg">Get Free Consultation</a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://www.informedsystemsltd.com/wp-content/uploads/2022/09/bio.png" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Invest Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Why Invest in an Access Control System?</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Enhanced Security</h4>
+                        <p>Restrict unauthorized access and keep your premises safe with advanced authentication methods.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h4>Convenience</h4>
+                        <p>No need for traditional keys—use cards, codes, or biometrics for quick and easy entry.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Monitor Entry & Exit</h4>
+                        <p>Track who comes in and out of your property in real time with detailed access logs.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h4>Customizable Access Levels</h4>
+                        <p>Control different access permissions for employees, visitors, or residents with precision.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h4>Integration with Security Systems</h4>
+                        <p>Works seamlessly with CCTV, alarms, and electric fences for comprehensive security.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Solutions Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Our Access Control Solutions</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-fingerprint me-2"></i>Biometric Access</h3>
+                            <p>Fingerprint & Face Recognition</p>
+                        </div>
+                        <div class="solution-body">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Highly secure – No lost keys or stolen cards.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Fast authentication – Quick and easy access with just a touch or glance.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Perfect for offices, residential buildings, and high-security areas.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-id-card me-2"></i>RFID Card & Keypad Systems</h3>
+                        </div>
+                        <div class="solution-body">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Smart card entry – Issue RFID cards for controlled access.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>PIN code entry – Secure and easy-to-manage access for employees and visitors.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Ideal for businesses, schools, and apartment complexes.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-door-open me-2"></i>Automatic Door & Gate Access</h3>
+                        </div>
+                        <div class="solution-body">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Seamless entry with automatic doors & gates.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Remote access options for added convenience.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Best for gated communities, hotels, and corporate offices.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="solution-card">
+                        <div class="solution-header">
+                            <h3><i class="fas fa-mobile-alt me-2"></i>Mobile & Remote Access Control</h3>
+                        </div>
+                        <div class="solution-body">
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Unlock doors remotely via smartphone apps.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Manage access permissions from anywhere.</div>
+                            </div>
+                            <div class="solution-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <div>Great for Airbnb hosts, co-working spaces, and smart homes.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Megzit Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Why Choose Megzit?</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="why-choose-item">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Custom Solutions</h4>
+                        <p>We design systems based on your specific security needs and requirements.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="why-choose-item">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4>High-Quality Equipment</h4>
+                        <p>Durable and reliable access control technology built to last.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="why-choose-item">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>Expert Installation</h4>
+                        <p>Professional setup for seamless operation and optimal performance.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="why-choose-item">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>24/7 Customer Support</h4>
+                        <p>Assistance whenever you need it, day or night.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="why-choose-item">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h4>Affordable Pricing</h4>
+                        <p>Secure your property without breaking the bank with our competitive pricing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Upgrade to Smart Security Today!</h2>
+            <p class="lead mb-4">Protect your property with Megzit's Access Control Systems for reliable and hassle-free security.</p>
+            <div class="phone-number mb-4">
+                <i class="fas fa-phone me-2"></i>Call 0111412407 today for a FREE consultation!
+            </div>
+            <a href="tel:0111412407" class="btn btn-light btn-lg">Call Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Megzit Security. All rights reserved.</p>
+            <p>Access Control Systems - Secure & Smart Entry Solutions</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
